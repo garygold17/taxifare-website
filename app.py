@@ -1,7 +1,6 @@
 import streamlit as st
 import requests
 from datetime import datetime
-from geopy.distance import geodesic
 
 # Set up parameters for the app
 title = st.title("Calculating taxi fare in New York City!")
@@ -23,9 +22,6 @@ passenger_count = st.number_input('Passenger Count',value=0)
 
 url = 'https://taxifare.lewagon.ai/predict'
 
-def calculate_distance(pickup, dropoff):
-    return geodesic(pickup, dropoff).kilometers
-
 # Let's call our API using the `requests` package...
 if st.button('Get Fare Prediction'):
     # Let's build a dictionary containing the parameters for our API...
@@ -40,16 +36,16 @@ if st.button('Get Fare Prediction'):
 
     response = requests.get(url, params=api_params)
     # Let's retrieve the prediction from the **JSON** returned by the API...
+if st.button('Get Fare Prediction'):
+
+    response = requests.get(url, params=api_params)
+
     if response.status_code == 200:
+
         prediction = response.json().get('fare', 'Error: No fare returned')
+
         st.write(f'Estimated Fare: ${prediction}')
 
-        # Convert pickup and dropoff coordinates to tuple
-        pickup_coords = (pickup_latitude, pickup_longitude)
-        dropoff_coords = (dropoff_latitude, dropoff_longitude)
-
-        # Calculate distance
-        distance = calculate_distance(pickup_coords, dropoff_coords)
-        st.write(f"Distance between pickup and dropoff points: {distance:.2f} kilometers")
     else:
+
         st.write('Error: Failed to retrieve prediction')
