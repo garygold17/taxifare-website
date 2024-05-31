@@ -33,8 +33,6 @@ if st.button('Get Fare Prediction'):
         'dropoff_latitude': dropoff_latitude,
         'passenger_count': passenger_count
     }
-
-    response = requests.get(url, params=api_params)
     # Let's retrieve the prediction from the **JSON** returned by the API...
 if st.button('Get Fare Prediction'):
 
