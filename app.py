@@ -1,8 +1,6 @@
 import streamlit as st
 import requests
 from datetime import datetime
-import folium
-from folium import plugins
 from geopy.distance import geodesic
 
 # Set up parameters for the app
